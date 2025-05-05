@@ -1,0 +1,52 @@
+:root {
+    --padding: 10px;
+    --borderRadius: 5px
+}
+
+/* total searching module */
+.SearchModule {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    min-width: 60%;
+    padding: 10px;
+}
+
+.inputSearchField {
+    position: sticky;
+    background-color: white;
+    top: 0;
+    z-index: 1000
+}
+
+/* searching Field*/
+#searching {
+    padding: var(--padding);
+    max-width: 99.9%;
+    min-width: 99.9%;
+    outline: none;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: var(--borderRadius);
+}
+
+/* searching Button*/
+.searchButton {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* search Result */
+.searchResult {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: var(--borderRadius);
+}
