@@ -1,9 +1,15 @@
-@font-face { font-family: "Zoho_Puvi_Bold"; src: url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.eot") format("embedded-opentype"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.woff2") format("woff2"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.otf") format("opentype"); font-style: normal; font-weight: normal; font-display: swap; }
+@font-face {
+    font-family: "Zoho_Puvi_Bold";
+    src: url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.eot") format("embedded-opentype"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.woff2") format("woff2"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
 
 :root {
     --padding: 10px;
-    --min_width: 100%;
-    --max_width: 100%;
+    --min_width: 90%;
+    --max_width: 90%;
     --max_heigth: 100vh;
     --min_heigth: 100vh;
     --marginTop: 10px;
@@ -12,10 +18,12 @@
     --grayBorder: 1px solid #ddd;
 }
 
+.listSearch {
+    background-color: #f3f4f6;
+}
+
 /* total module head */
 .searchListMain {
-    min-width: var(--min_width);
-    max-width: var(--max_width);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,9 +37,17 @@
     margin-top: 10px;
     position: sticky;
     top: 0;
-    background-color: white;
-    box-shadow: 1px 1px 10px #ddd;
     z-index: 1000;
+}
+
+.searching{
+    outline: none;
+    padding: var(--padding);
+    max-width: 99.9%;
+    min-width: 99.9%;
+    background-color:white;
+    border: var(--grayBorder);
+    border-radius: var(--borderRadius);
 }
 
 /* main head of search list */
@@ -46,32 +62,37 @@
     box-shadow: 1px 1px 10px #ddd;
     overflow: scroll;
     padding: var(--padding);
+    background-color: white;
 }
 
 /* search result list */
 .searchResultList {
     border: var(--grayBorder);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: var(--borderRadius);
     margin-bottom: var(--marginBottom);
     transition: 0.3s all ease-in-out;
-    color: rgb(34, 42, 35);
 }
 
 .searchResultList:hover {
-    border: 1px solid black;
     cursor: pointer;
-    color: black;
     box-shadow: 1px 1px 10px #ddd;
     transform: translateY(-5px);
-    background-color: #f2f2f2;
+}
 
+.listValueName{
+    transition: 0.1s all ease-in;
+}
+
+.listValueName:hover{
+    transform:translateX(5px);
+    color: #7e8c7d;
 }
 
 .imagesHead {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .imagesRow {
@@ -85,10 +106,7 @@
     transition: 0.3s all ease-in-out;
 }
 
-.imagesRow:hover {
-    box-shadow: 1px 1px 10px #ddd;
-    transform: translateY(-5px)
-}
+.imagesRow:hover {}
 
 .image {
     border-radius: var(--borderRadius);
@@ -96,7 +114,9 @@
     transition: 0.3s all ease-in-out;
 }
 
-.image:hover {}
+.image:hover {
+    transform: translateY(-5px)
+}
 
 .notFoundImagesRow {
     min-height: var(--min_heigth);

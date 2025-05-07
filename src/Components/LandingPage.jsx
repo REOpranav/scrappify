@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Layout, Input, Typography, Button, message } from 'antd';
+import { Layout, Input, Typography, Button, message, Form } from 'antd';
 import { UserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,9 +15,18 @@ const isURL = (input) => { // checking Incoming params is URL or not
 const LandingPage = () => {
   const [url, setUrl] = useState('');
   const { setGlobalListState, setDynamicURL } = useContext(UserContext)
+  const [checkingInput, setCheckingInput] = useState(false)
   const navigate = useNavigate();
 
   const dynamicScrapURL = (scrappingURL) => {
+
+    if (scrappingURL == "") {
+      setCheckingInput(true)
+      return
+    }
+
+    setCheckingInput(false)
+
     if (isURL(scrappingURL)) {
       setDynamicURL(scrappingURL)
       navigate('/search')
@@ -41,15 +50,21 @@ const LandingPage = () => {
           <Paragraph type="secondary">
             Enter a URL to instantly scrape and analyze data. Our fast and simple interface makes data extraction effortless.
           </Paragraph>
-          <Search
-            placeholder="https://example.com"
-            enterButton="Scrape Now"
-            size="large"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            style={{ marginTop: 20 }}
-            onSearch={() => dynamicScrapURL(url)}
-          />
+          <Form.Item
+            validateStatus={checkingInput ? "error" : 'success'}
+            help={checkingInput && 'Enter any URL or Search Key word'}
+          >
+            <Search
+              placeholder="https://example.com || Key word"
+              enterButton="Scrape Now"
+              size="large"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              style={{ marginTop: 20 }}
+              onSearch={() => dynamicScrapURL(url)}
+              status={url.length < 0 && 'error'}
+            />
+          </Form.Item>
         </div>
       </Content>
 

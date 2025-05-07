@@ -1,7 +1,19 @@
-@font-face { font-family: "Zoho_Puvi_Bold"; src: url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.eot") format("embedded-opentype"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.woff2") format("woff2"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.otf") format("opentype"); font-style: normal; font-weight: normal; font-display: swap; }
+@font-face {
+    font-family: "Zoho_Puvi_Bold";
+    src: url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.eot") format("embedded-opentype"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.woff2") format("woff2"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.otf") format("opentype");
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
 :root {
     --padding: 10px;
     --borderRadius: 5px
+}
+
+.SearchModuleHead {
+    display: flex;
+    justify-content: center;
 }
 
 /* total searching module */
@@ -21,7 +33,12 @@
     overflow: auto;
 }
 
-.HeadParas{
+.searchModuleSecoundSection {
+    margin-top: 10px;
+}
+
+.HeadParas {
+    font-family: "Zoho_Puvi_Bold";
     padding: 10px 0;
     color: grey;
     font-size: large;
@@ -47,7 +64,7 @@
     min-width: 99.9%;
     outline: none;
     border: 1px solid #ddd;
-    background-color:#f2f2f2;
+    background-color: #f2f2f2;
     border-radius: var(--borderRadius);
 }
 
@@ -72,10 +89,23 @@
     /* border-radius: var(--borderRadius); */
 }
 
+.scrapResultLink {
+    padding: 10px 0;
+    font-family: "Zoho_Puvi_Bold";
+    color: grey;
+}
+
+.scrapResultHead {
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-bottom: -20px;
+    font-family: "Zoho_Puvi_Bold";
+    color: grey;
+}
+
 /* parasResult */
 .paraResult {
     padding: 10px;
     border: 1px solid #ddd;
-    /* border-radius: var(--borderRadius); */
-    background-color:#f2f2f2;
+    background-color: #f2f2f2;
 }

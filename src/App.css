@@ -9,8 +9,8 @@
 }
 
 .appMain{
-    min-width: 90%;
-    max-width: 90%;
+    min-width: 100%;
+    max-width: 100%;
     min-height: 100vh;
     max-height: 100vh;
 }

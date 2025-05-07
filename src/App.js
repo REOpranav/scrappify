@@ -15,15 +15,15 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ setDynamicURL, dynamicURL, spentTime, setSpentTime }}>
-        <main className='appMain'>
-          <Routes>
-            <Route path='/' element={<LandingPage />} />
-            <Route path='/search' element={<Search />} />
-            <Route path='/list' element={<ListSearch />} />
-          </Routes>
-        </main>
-      </UserContext.Provider>
+        <UserContext.Provider value={{ setDynamicURL, dynamicURL, spentTime, setSpentTime }}>
+          <main className='appMain'>
+            <Routes>
+              <Route path='/' element={<LandingPage />} />
+              <Route path='/search' element={<Search />} />
+              <Route path='/list' element={<ListSearch />} />
+            </Routes>
+          </main>
+        </UserContext.Provider>
 
     </div>
   );
