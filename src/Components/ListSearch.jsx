@@ -1,9 +1,10 @@
-import { Col, Row, Image } from 'antd'
+import { Col, Row, Image, Button } from 'antd'
 import React, { useActionState, useContext, useEffect, useState } from 'react'
 import '../Css/ListSearch.css'
 import { UserContext } from '../App'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { SearchOutlined } from '@ant-design/icons'
 
 
 
@@ -24,7 +25,7 @@ const ListSearch = () => {
     const [searchingList, setSearchingList] = useState([])
 
     const navigate = useNavigate()
-    const URL = `http://localhost:3002/scrap/search`
+    const URL = `https://scrapping-node-server.vercel.app/scrap/search`
 
     // scrpping function
     const scrapping = (URL, formValue) => {
@@ -60,8 +61,14 @@ const ListSearch = () => {
             <Row className='inputSearchFieldSearch'>
                 <Col span={24}>
                     <form action={submit}>
-                        <input type="search" name="searching" id="searching" placeholder='Seach anything' />
-                        <input type="submit" className='searchButton' value="submit" />
+                        <input type="search" name="searching" id="searching" placeholder='Enter keywords...' />
+                        <Button
+                            type="primary"
+                            icon={<SearchOutlined />}
+                            htmlType="submit"
+                            className="searchButton"
+                        ></Button>
+
                     </form>
                 </Col>
             </Row>

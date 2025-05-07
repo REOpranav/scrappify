@@ -1,7 +1,8 @@
 import axios from 'axios';
 import '../Css/Search.css';
 import React, { useActionState, useContext, useEffect, useRef, useState } from 'react'
-import { Row, Col, Typography, Divider } from 'antd'
+import { Row, Col, Typography, Divider, Button } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 
 import { UserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +23,7 @@ const Search = () => {
     const scrapFunction = (formValue) => {
         if (pending || !formValue) return;
         try {
-            let URL = `http://localhost:3002/scrap/search`;
+            let URL = `https://scrapping-node-server.vercel.app/scrap/search`;
             const timeSpent = (Date.now() - spentTime) / 1000;
             axios.post(URL, { formData: formValue }).then((val) => {
                 setSpentTime(Date.now());
@@ -30,7 +31,7 @@ const Search = () => {
                 setTotalDetail(val?.data?.totalDetail);
                 setDbStoringDatas(val?.data?.dbStoringHeadsAndURL);
 
-                axios.post("http://localhost:3002/db/heads", {
+                axios.post("https://scrapping-node-server.vercel.app/db/heads", {
                     timer: timeSpent,
                     dbStoringHeadsAndURL: val?.data?.dbStoringHeadsAndURL,
                 }).then(res => console.log(res.data));
@@ -52,8 +53,13 @@ const Search = () => {
                     <Row className='inputSearchField'>
                         <Col span={24}>
                             <form action={submit}>
-                                <input type="search" name="searching" id="searching" placeholder='Seach anything' onClick={() =>navigate('/') } />
-                                <input type="submit" className='searchButton' value="submit" />
+                                <input type="search" name="searching" id="searching" placeholder='Enter keywords...' onClick={() => navigate('/')} />
+                                <Button
+                                    type="primary"
+                                    icon={<SearchOutlined />}
+                                    htmlType="submit"
+                                    className="searchButton"
+                                ></Button>
                             </form>
                         </Col>
                     </Row>
