@@ -40,12 +40,12 @@
     z-index: 1000;
 }
 
-.searching{
+.searching {
     outline: none;
     padding: var(--padding);
     max-width: 99.9%;
     min-width: 99.9%;
-    background-color:white;
+    background-color: white;
     border: var(--grayBorder);
     border-radius: var(--borderRadius);
 }
@@ -80,12 +80,12 @@
     transform: translateY(-5px);
 }
 
-.listValueName{
+.listValueName {
     transition: 0.1s all ease-in;
 }
 
-.listValueName:hover{
-    transform:translateX(5px);
+.listValueName:hover {
+    transform: translateX(5px);
     color: #7e8c7d;
 }
 
@@ -93,6 +93,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    max-height: 500px;
 }
 
 .imagesRow {
@@ -142,4 +143,8 @@
     max-height: 300px;
     min-width: 300px;
     max-width: 300px;
+}
+
+.GeminiListSearch {
+    padding: var(--padding);
 }

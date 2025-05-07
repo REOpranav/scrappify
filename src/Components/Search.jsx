@@ -71,16 +71,16 @@ const Search = () => {
                                             <Row style={{ padding: "10px 0" }}>
                                                 <Col>
                                                     <Row className='scrapResultLink'>Official Link</Row>
-                                                    <Row span={24} style={{marginLeft:'10px'}}><Typography.Link href={totalHeadDetail?.name} target="_blank" copyable>{totalHeadDetail?.URLName}</Typography.Link></Row>
-                                                    
+                                                    <Row span={24} style={{ marginLeft: '10px' }}><Typography.Link href={totalHeadDetail?.name} target="_blank" copyable>{totalHeadDetail?.URLName}</Typography.Link></Row>
+
                                                 </Col>
                                             </Row>
 
                                             <Row>
                                                 <Col span={24}>
-                                                    <Row className='scrapResultHead'>Titles</Row>
+                                                    {totalHeadDetail?.data[0].length > 0 && <Row className='scrapResultHead'>Titles</Row>}
                                                     {totalHeadDetail?.data?.map((val) => {
-                                                        return val?.paragraphs?.length > 0 && <Row style={{marginLeft:'10px'}}>
+                                                        return val?.paragraphs?.length > 0 && <Row style={{ marginLeft: '10px' }}>
                                                             <Col span={24}>
                                                                 <Row>
                                                                     <Typography.Title level={4}><span style={{ color: '#4ca30d', fontWeight: '400' }}>{val.heading}</span></Typography.Title>
