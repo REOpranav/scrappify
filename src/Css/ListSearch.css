@@ -1,0 +1,125 @@
+@font-face { font-family: "Zoho_Puvi_Bold"; src: url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.eot") format("embedded-opentype"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.woff2") format("woff2"), url("https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Bold.otf") format("opentype"); font-style: normal; font-weight: normal; font-display: swap; }
+
+:root {
+    --padding: 10px;
+    --min_width: 100%;
+    --max_width: 100%;
+    --max_heigth: 100vh;
+    --min_heigth: 100vh;
+    --marginTop: 10px;
+    --marginBottom: 10px;
+    --borderRadius: 10px;
+    --grayBorder: 1px solid #ddd;
+}
+
+/* total module head */
+.searchListMain {
+    min-width: var(--min_width);
+    max-width: var(--max_width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* search field */
+.inputSearchFieldSearch {
+    min-width: var(--min_width);
+    max-width: var(--max_width);
+    margin-top: 10px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    box-shadow: 1px 1px 10px #ddd;
+    z-index: 1000;
+}
+
+/* main head of search list */
+.searchResultListMain {
+    margin-top: var(--marginTop);
+    min-width: var(--min_width);
+    max-width: var(--max_width);
+    min-height: var(--min_heigth);
+    max-height: var(--max_heigth);
+    border: var(--grayBorder);
+    border-radius: var(--borderRadius);
+    box-shadow: 1px 1px 10px #ddd;
+    overflow: scroll;
+    padding: var(--padding);
+}
+
+/* search result list */
+.searchResultList {
+    border: var(--grayBorder);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: var(--marginBottom);
+    transition: 0.3s all ease-in-out;
+    color: rgb(34, 42, 35);
+}
+
+.searchResultList:hover {
+    border: 1px solid black;
+    cursor: pointer;
+    color: black;
+    box-shadow: 1px 1px 10px #ddd;
+    transform: translateY(-5px);
+    background-color: #f2f2f2;
+
+}
+
+.imagesHead {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.imagesRow {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    margin-top: var(--marginTop);
+    border: var(--grayBorder);
+    border-radius: var(--borderRadius);
+    transition: 0.3s all ease-in-out;
+}
+
+.imagesRow:hover {
+    box-shadow: 1px 1px 10px #ddd;
+    transform: translateY(-5px)
+}
+
+.image {
+    border-radius: var(--borderRadius);
+    padding: 10px;
+    transition: 0.3s all ease-in-out;
+}
+
+.image:hover {}
+
+.notFoundImagesRow {
+    min-height: var(--min_heigth);
+    max-height: var(--max_heigth);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notFoundImageColum {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notFoundImageColumRowText {
+    font-size: x-large;
+    font-family: "Zoho_Puvi_Bold"
+}
+
+.noResultImage {
+    max-height: 300px;
+    min-width: 300px;
+    max-width: 300px;
+}

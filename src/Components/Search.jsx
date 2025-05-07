@@ -1,8 +1,10 @@
 import axios from 'axios';
 import '../Css/Search.css';
-import React, { useActionState, useContext, useEffect, useInsertionEffect, useRef, useState } from 'react'
-import { Flex, Row, Col, Typography, Input, Button, Divider } from 'antd'
-import { SearchOutlined } from "@ant-design/icons";
+import React, { useActionState, useContext, useEffect, useRef, useState } from 'react'
+import { Row, Col, Typography, Divider } from 'antd'
+
+import { UserContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 const handleSubmit = (params, formvalue) => {
     return formvalue.get("searching")
@@ -14,47 +16,43 @@ const Search = () => {
     const [totalHeadDetail, setTotalHeadDetail] = useState([])
     const [totalDetail, setTotalDetail] = useState([])
     const [dbStoringHeads, setDbStoringDatas] = useState([])
+    const { dynamicURL, spentTime, setSpentTime } = useContext(UserContext)
+    const navigate = useNavigate()
 
-    // this detail for storing potencial data only in DB
-    const runningTimer = useRef(0) // running time
-    const timerResult = useRef(0) // Final output ( how much time user stay for url )
-
-    useEffect(() => { // get scrapped Data
+    const scrapFunction = (formValue) => {
         if (pending || !formValue) return;
         try {
             let URL = `http://localhost:3002/scrap/search`;
-            timerResult.current = ((Date.now() - runningTimer.current) / 1000).toFixed(2)
+            const timeSpent = (Date.now() - spentTime) / 1000;
             axios.post(URL, { formData: formValue }).then((val) => {
-                runningTimer.current = Date.now()
-                setTotalHeadDetail(val?.data?.totalHeadDetail) // getting total Head Detail from DB
-                setTotalDetail(val?.data?.totalDetail) // getting all detail when scrapped
-                setDbStoringDatas(val?.data?.dbStoringHeadsAndURL)
+                setSpentTime(Date.now());
+                setTotalHeadDetail(val?.data?.totalHeadDetail);
+                setTotalDetail(val?.data?.totalDetail);
+                setDbStoringDatas(val?.data?.dbStoringHeadsAndURL);
+
+                axios.post("http://localhost:3002/db/heads", {
+                    timer: timeSpent,
+                    dbStoringHeadsAndURL: val?.data?.dbStoringHeadsAndURL,
+                }).then(res => console.log(res.data));
             });
         } catch (err) {
             console.log(err);
         }
-    }, [formValue])
+    };
 
+    useEffect(() => { // get scrapped Data
+        scrapFunction(dynamicURL ? dynamicURL : formValue)
+    }, [formValue, dynamicURL])
 
-    useEffect(() => { // Storing in DB process
-        try {
-            let URL = `http://localhost:3002/db/heads`;
-            axios.post(URL, { timer: timerResult?.current, dbStoringHeadsAndURL: dbStoringHeads }).then((val) => {
-                console.log(val.data);
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    }, [formValue])
 
     return (
         <div className='SearchModule'>
             <Row justify={'space-around'}>
-                <Col span={12} className='scrappedValueWithHeading'>
+                <Col span={11} className='scrappedValueWithHeading'>
                     <Row className='inputSearchField'>
                         <Col span={24}>
                             <form action={submit}>
-                                <input type="search" name="searching" id="searching" placeholder='Seach anything' />
+                                <input type="search" name="searching" id="searching" placeholder='Seach anything' onClick={() =>navigate('/') } />
                                 <input type="submit" className='searchButton' value="submit" />
                             </form>
                         </Col>
@@ -90,14 +88,15 @@ const Search = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col span={10} className='scrappedValueWithParas'>
+                <Col span={12} className='scrappedValueWithParas'>
+                    <Row className='HeadParas'>Key Areas ...</Row>
                     <Row className='paraResult'>
                         <Col span={24}>
                             {totalDetail?.paras?.map((val) => {
                                 return val !== '' && <Row>
                                     <Col span={24}>
                                         <Row>{val}</Row>
-                                        <Divider style={{ borderColor: '#4ca30d' }} />
+                                        <Divider style={{ borderColor: '#ddd' }} />
                                     </Col>
                                 </Row>
                             })}

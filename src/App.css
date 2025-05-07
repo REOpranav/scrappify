@@ -1,4 +1,16 @@
-.appMain{
+.App{
+    min-height: 100vh;
+    max-height: 100vh;
+    min-width: 100%;
+    max-width: 100%;
     display: flex;
     justify-content: center;
+    font-family: "Open Sans", sans-serif;
+}
+
+.appMain{
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 100vh;
+    max-height: 100vh;
 }
