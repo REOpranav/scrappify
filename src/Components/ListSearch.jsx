@@ -146,7 +146,7 @@ const ListSearch = () => {
                                         <Row style={{ padding: "10px 0" }}>
                                             <Col span={24}>
                                                 <Row className='scrapResultLink'>For More Detail</Row>
-                                                <Row style={{ marginLeft: '10px' }}><Tooltip title={'click to search'} placement='left' color='blue'><Typography.Link to={searchingList?.URL} target='_blank' copyable>{searchingList?.URL}</Typography.Link></Tooltip></Row>
+                                                <Row style={{ marginLeft: '10px' }}><Typography.Link to={searchingList?.URL} target='_blank' copyable>{searchingList?.URL}</Typography.Link></Row>
                                             </Col>
                                         </Row>
 
