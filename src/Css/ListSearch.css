@@ -163,6 +163,13 @@
     animation: fadeInAnimation 1s forwards;
 }
 
+.llmResponce{
+    border-bottom: var(--grayBorder);
+    color: #7e8c7d;
+    padding: var(--padding);
+}
+
+
 @keyframes fadeInAnimation {
     to {
         opacity: 1;

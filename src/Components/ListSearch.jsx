@@ -137,6 +137,12 @@ const ListSearch = () => {
                                 // This code is for searching List using ( gemini responce )
                                 : <Row>
                                     <Col span={24}>
+                                        <Row justify={'space-between'} className='llmResponce'>
+                                            <Col>LLM Responce</Col>
+                                            <Col>- Gemini</Col>
+                                        </Row>
+                                    </Col>
+                                    <Col span={24} style={{marginLeft:'10px'}}>
                                         <Row style={{ padding: "10px 0" }}>
                                             <Col span={24}>
                                                 <Row className='scrapResultLink'>For More Detail</Row>
@@ -164,7 +170,7 @@ const ListSearch = () => {
                             // this is loading code
                             <Row className='notFoundImagesRow'>
                                 <Col span={24} className='notFoundImageColum'>
-                                    {DbResponceIndicator && <Row className='indicatorSText fade-in'><Col><Row justify={'center'}>Searching in history about <span style={{color:'red',marginLeft:'5px'}}>{dynamicURL}</span></Row></Col></Row>}
+                                    {DbResponceIndicator && <Row className='indicatorSText fade-in'><Col><Row justify={'center'}>Searching in history about <span style={{ color: 'red', marginLeft: '5px' }}>{dynamicURL}</span></Row></Col></Row>}
                                     {geminiResponceIndicator && <Row>
                                         <Col span={24}>
                                             <Row justify={'center'} className='indicatorSText fade-in'><Col span={24}><Row justify={'center'}> No relevant data found in the database.</Row> <Row justify={'center'}>Searching using Gemini LLM...</Row></Col></Row>
