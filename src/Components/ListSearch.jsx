@@ -173,7 +173,7 @@ const ListSearch = () => {
                                     {DbResponceIndicator && <Row className='indicatorSText fade-in'><Col><Row justify={'center'}>Searching in history about <span style={{ color: 'red', marginLeft: '5px' }}>{dynamicURL}</span></Row></Col></Row>}
                                     {geminiResponceIndicator && <Row>
                                         <Col span={24}>
-                                            <Row justify={'center'} className='indicatorSText fade-in'><Col span={24}><Row justify={'center'}> No relevant data found in the database.</Row> <Row justify={'center'}>Searching using Gemini LLM...</Row></Col></Row>
+                                            <Row justify={'center'} className='indicatorSText fade-in'><Col span={24}><Row justify={'center'}> No relevant data found in the database.</Row> <Row justify={'center'}>Searching using LLM...</Row></Col></Row>
                                         </Col>
                                     </Row>}
                                     <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
