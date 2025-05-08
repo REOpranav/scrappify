@@ -23,6 +23,8 @@ const ListSearch = () => {
     const [searchingList, setSearchingList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [geminiResponceStatus, setGeminiResponceStatus] = useState(false)
+    const [geminiResponceIndicator, setGeminiResponceIndicator] = useState(false)
+    const [DbResponceIndicator, setDbResponceIndicator] = useState(false)
 
     const navigate = useNavigate()
     const URL = `https://scrapping-node-server.vercel.app/scrap/search`
@@ -37,16 +39,25 @@ const ListSearch = () => {
                 return
             }
             setIsLoading(true)
+            setDbResponceIndicator(true)
             axios.post(URL, { formData: formValue }).then((val) => {
-
                 if (Array.isArray(val.data)) {
-                    setSearchingList(val?.data)
-                    setIsLoading(false)
-                    setGeminiResponceStatus(false)
+                    setTimeout(() => {
+                        setSearchingList(val?.data)
+                        setIsLoading(false)
+                        setGeminiResponceStatus(false)
+                        setDbResponceIndicator(false)
+                    }, 1 * 1000);
+
                 } else if (typeof val.data == 'object') {
-                    setSearchingList(val?.data);
-                    setIsLoading(false)
-                    setGeminiResponceStatus(true)
+                    setDbResponceIndicator(false)
+                    setGeminiResponceIndicator(true)
+                    setTimeout(() => {
+                        setSearchingList(val?.data);
+                        setIsLoading(false)
+                        setGeminiResponceStatus(true)
+                        setGeminiResponceIndicator(false)
+                    }, 2 * 1000)
                 }
             });
 
@@ -67,7 +78,7 @@ const ListSearch = () => {
     }
 
     console.log(searchingList);
-    
+
 
     return (
         <div className='listSearch'>
@@ -123,7 +134,7 @@ const ListSearch = () => {
                                     </Col>
                                 </Row>} </>
 
-                                // This code is for searching List 
+                                // This code is for searching List using ( gemini responce )
                                 : <Row>
                                     <Col span={24}>
                                         <Row style={{ padding: "10px 0" }}>
@@ -153,14 +164,20 @@ const ListSearch = () => {
                             // this is loading code
                             <Row className='notFoundImagesRow'>
                                 <Col span={24} className='notFoundImageColum'>
+                                    {DbResponceIndicator && <Row className='indicatorSText fade-in'><Col><Row justify={'center'}>Searching in history about <span style={{color:'red',marginLeft:'5px'}}>{dynamicURL}</span></Row></Col></Row>}
+                                    {geminiResponceIndicator && <Row>
+                                        <Col span={24}>
+                                            <Row justify={'center'} className='indicatorSText fade-in'><Col span={24}><Row justify={'center'}> No relevant data found in the database.</Row> <Row justify={'center'}>Searching using Gemini LLM...</Row></Col></Row>
+                                        </Col>
+                                    </Row>}
                                     <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
                                 </Col>
                             </Row>
                         }
                     </Col>
                 </Row>
-            </main>
-        </div>
+            </main >
+        </div >
 
     )
 }

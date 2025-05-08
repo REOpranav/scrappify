@@ -148,3 +148,23 @@
 .GeminiListSearch {
     padding: var(--padding);
 }
+
+.indicatorSText {
+    padding: var(--padding);
+    font-family: "Zoho_Puvi_Bold";
+    font-size: large;
+    color: #7e8c7d;
+    transition: 0.2 all ease-in-out;
+}
+
+/* styles.css or in your component's style section */
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 1s forwards;
+}
+
+@keyframes fadeInAnimation {
+    to {
+        opacity: 1;
+    }
+}
