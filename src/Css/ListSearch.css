@@ -81,6 +81,7 @@
 }
 
 .listValueName {
+    padding: 6px;
     transition: 0.1s all ease-in;
 }
 
