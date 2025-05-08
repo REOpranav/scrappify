@@ -80,7 +80,7 @@ const Search = () => {
                     </Button>
                 </Row>
                 {!isLoading ? <>
-                    {!Array.isArray(totalHeadDetail) ?
+                    {(!Array.isArray(totalHeadDetail) && totalHeadDetail.length >  0) ?
                         <Row justify={'space-between'} className='searchModuleSecoundSection'>
                             <Col span={11} className='scrappedValueWithHeading'>
                                 <Row className='searchResult'>
