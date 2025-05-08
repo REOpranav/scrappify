@@ -40,8 +40,8 @@ const Search = () => {
                 setSpentTime(Date.now())
                 setTotalHeadDetail(data.totalHeadDetail)
                 setTotalDetail(data.totalDetail)
-                setIsLoading(false);
             }
+            setIsLoading(false);
 
             console.log("Current: ", currentDBStoringData);
             console.log("Previous: ", previousDBStoringData);
@@ -65,7 +65,7 @@ const Search = () => {
             callOnceUseEffect.current = true
         }
     }, [formValue, dynamicURL])
-
+    
 
     return (
         <main className='SearchModuleHead'>
