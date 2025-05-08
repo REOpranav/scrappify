@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Layout, Input, Typography, Button, message, Form, Alert } from 'antd';
+import { Layout, Input, Typography, Button, message, Form } from 'antd';
 import { UserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,16 +41,12 @@ const LandingPage = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ background: '#001529', padding: '0 20px', display: 'flex', alignItems: 'center' }}>
-        <Title level={3} style={{ color: 'white', margin: 0 }}>Scrappify</Title>
+        <Title level={3} style={{ color: 'white', margin: 0 }}>ScrapEase</Title>
       </Header>
 
       <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '40px' }}>
         <div style={{ textAlign: 'center', maxWidth: 600 }}>
-          <Alert message="Input the URL for the new web data extraction." type="success" />
-          <br />
-          <Alert message="Type a keyword to search existing entries" type="info" />
-          <br />
-          <Title>search using scrappify</Title>
+          <Title>Welcome to ScrapEase</Title>
           <Paragraph type="secondary">
             Enter a URL to instantly scrape and analyze data. Our fast and simple interface makes data extraction effortless.
           </Paragraph>

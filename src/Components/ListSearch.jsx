@@ -86,7 +86,7 @@ const ListSearch = () => {
                 <Row className='inputSearchFieldSearch'>
                     <Col span={24}>
                         <form action={submit}>
-                            <input type="search" name="searching" className='searching' placeholder='Search by Enter keywords...' />
+                            <input type="search" name="searching" className='searching' placeholder='https://example.com || Key word' />
                             <Button
                                 type="primary"
                                 icon={<SearchOutlined />}
