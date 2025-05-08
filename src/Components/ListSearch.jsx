@@ -25,7 +25,7 @@ const ListSearch = () => {
     const [geminiResponceStatus, setGeminiResponceStatus] = useState(false)
 
     const navigate = useNavigate()
-    const URL = `https://scrapping-node-server.vercel.app/scrap/search`
+    const URL = `http://localhost:3002/scrap/search`
 
     // scrpping function
     const scrapping = (URL, formValue) => {

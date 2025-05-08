@@ -2,7 +2,7 @@ import axios from 'axios';
 import '../Css/Search.css';
 import React, { useActionState, useContext, useEffect, useRef, useState } from 'react'
 import { Row, Col, Typography, Divider, Button, Image, Empty, Spin } from 'antd'
-import { LoadingOutlined, SearchOutlined } from '@ant-design/icons'
+import { LoadingOutlined, LoginOutlined, SearchOutlined } from '@ant-design/icons'
 import { UserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,37 +15,55 @@ const Search = () => {
     const [formValue, submit, pending] = useActionState(handleSubmit, "");
     const [totalHeadDetail, setTotalHeadDetail] = useState([])
     const [totalDetail, setTotalDetail] = useState([])
-    const [dbStoringHeads, setDbStoringDatas] = useState([])
-    const { dynamicURL, spentTime, setSpentTime } = useContext(UserContext)
-    const [isLoading, setIsLoading] = useState(false)
+    const { dynamicURL, spentTime, setSpentTime, potencialURL} = useContext(UserContext)
+    const [isLoading, setIsLoading] = useState(false) // indication loading...
+    const callOnceUseEffect = useRef(false) // this will help to prevent multiple render at a timer
     const navigate = useNavigate()
 
-    const scrapFunction = (formValue) => {
+    const scrapFunction = async (formValue) => {
         if (pending || !formValue) return;
+
+        const URL = `https://scrapping-node-server.vercel.app/scrap/search`
+        const dbURL = `https://scrapping-node-server.vercel.app/db/heads`
+        const timeSpent = (Date.now() - spentTime) / 1000
+
         try {
-            let URL = `https://scrapping-node-server.vercel.app/scrap/search`;
-            const timeSpent = (Date.now() - spentTime) / 1000;
-            setIsLoading(true)
-            axios.post(URL, { formData: formValue }).then((val) => {
-                if (Object.entries(val.data).length > 0) {
-                    setIsLoading(false)
-                    setSpentTime(Date.now());
-                    setTotalHeadDetail(val?.data?.totalHeadDetail);
-                    setTotalDetail(val?.data?.totalDetail);
-                    setDbStoringDatas(val?.data?.dbStoringHeadsAndURL);
-                }
-                axios.post("https://scrapping-node-server.vercel.app/db/heads", {
+            setIsLoading(true);
+
+            const previousDBStoringData = potencialURL?.current;
+            const response = await axios.post(URL, { formData: formValue })
+            const data = response.data
+            const currentDBStoringData = data?.dbStoringHeadsAndURL
+
+
+            if (Object.keys(data).length > 0) {
+                setSpentTime(Date.now())
+                setTotalHeadDetail(data.totalHeadDetail)
+                setTotalDetail(data.totalDetail)
+                setIsLoading(false);
+            }
+
+            console.log("Current: ", currentDBStoringData);
+            console.log("Previous: ", previousDBStoringData);
+
+            if (previousDBStoringData) { // this code is DB post request
+                await axios.post(dbURL, {
                     timer: timeSpent,
-                    dbStoringHeadsAndURL: val?.data?.dbStoringHeadsAndURL,
-                }).then(res => console.log(res.data));
-            });
+                    dbStoringHeadsAndURL: previousDBStoringData
+                });
+            }
+
+            potencialURL.current = currentDBStoringData
         } catch (err) {
-            console.log(err);
+            console.error("Scrap failed:", err);
         }
     };
 
     useEffect(() => { // get scrapped Data
-        scrapFunction(dynamicURL ? dynamicURL : formValue)
+        if (!callOnceUseEffect.current) { // this is for reducing the number of rendering when mount
+            scrapFunction(dynamicURL ? dynamicURL : formValue)
+            callOnceUseEffect.current = true
+        }
     }, [formValue, dynamicURL])
 
 
