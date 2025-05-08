@@ -15,7 +15,7 @@ const Search = () => {
     const [formValue, submit, pending] = useActionState(handleSubmit, "");
     const [totalHeadDetail, setTotalHeadDetail] = useState([])
     const [totalDetail, setTotalDetail] = useState([])
-    const { dynamicURL, spentTime, setSpentTime, potencialURL} = useContext(UserContext)
+    const { dynamicURL, spentTime, setSpentTime, potencialURL } = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false) // indication loading...
     const callOnceUseEffect = useRef(false) // this will help to prevent multiple render at a timer
     const navigate = useNavigate()
@@ -138,7 +138,14 @@ const Search = () => {
                                 <Row><Image src={'https://www.zoho.com/images/zoho-404-video.gif'} className='noResultImage'></Image></Row>
                             </Col>
                         </Row>} </>
-                    : <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} fullscreen />}
+                    :
+                    <Row className='notFoundImagesRow'>
+                        <Col span={24} className='notFoundImageColum'>
+                            <Row className='indicatorSText fade-in'><Col><Row justify={'center'}>Scraping data from the web...</Row></Col></Row>
+                            <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
+                        </Col>
+                    </Row>
+                }
             </div >
         </main>
     )
