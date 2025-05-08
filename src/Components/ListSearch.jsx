@@ -42,13 +42,10 @@ const ListSearch = () => {
             setDbResponceIndicator(true)
             axios.post(URL, { formData: formValue }).then((val) => {
                 if (Array.isArray(val.data)) {
-                    setTimeout(() => {
-                        setSearchingList(val?.data)
-                        setIsLoading(false)
-                        setGeminiResponceStatus(false)
-                        setDbResponceIndicator(false)
-                    }, 1 * 1000);
-
+                    setSearchingList(val?.data)
+                    setIsLoading(false)
+                    setGeminiResponceStatus(false)
+                    setDbResponceIndicator(false)
                 } else if (typeof val.data == 'object') {
                     setDbResponceIndicator(false)
                     setGeminiResponceIndicator(true)
@@ -139,10 +136,10 @@ const ListSearch = () => {
                                     <Col span={24}>
                                         <Row justify={'space-between'} className='llmResponce'>
                                             <Col>LLM Responce</Col>
-                                            <Col>- Gemini</Col>
+                                            <Col>{searchingList?.prompt} - Gemini</Col>
                                         </Row>
                                     </Col>
-                                    <Col span={24} style={{marginLeft:'10px'}}>
+                                    <Col span={24} style={{ marginLeft: '10px' }}>
                                         <Row style={{ padding: "10px 0" }}>
                                             <Col span={24}>
                                                 <Row className='scrapResultLink'>For More Detail</Row>

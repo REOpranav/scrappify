@@ -65,6 +65,8 @@ const Search = () => {
             callOnceUseEffect.current = true
         }
     }, [formValue, dynamicURL])
+
+    console.log();
     
 
     return (
@@ -80,7 +82,7 @@ const Search = () => {
                     </Button>
                 </Row>
                 {!isLoading ? <>
-                    {(!Array.isArray(totalHeadDetail) && totalHeadDetail.length >  0) ?
+                    {!Array.isArray(totalHeadDetail) && totalHeadDetail.data.length > 0 ?
                         <Row justify={'space-between'} className='searchModuleSecoundSection'>
                             <Col span={11} className='scrappedValueWithHeading'>
                                 <Row className='searchResult'>
